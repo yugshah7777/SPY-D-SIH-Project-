@@ -1,8 +1,0 @@
-# Ignore node_modules, Python cache, env files, etc.
-node_modules/
-.env
-__pycache__/
-*.pyc
-*.pyo
-.DS_Store
-postgres_data/
