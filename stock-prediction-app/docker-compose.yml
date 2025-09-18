@@ -1,0 +1,33 @@
+# Compose all services together
+version: '3.8'
+services:
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+  server:
+    build: ./server
+    ports:
+      - "5000:5000"
+    depends_on:
+      - ai-service
+      - db
+  ai-service:
+    build: ./ai-service
+    ports:
+      - "8000:8000"
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: stockdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
